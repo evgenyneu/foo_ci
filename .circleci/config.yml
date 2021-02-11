@@ -8,4 +8,13 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: echo "Hello World"
+
+      - run:
+          name: Clone a private repository
+          command: git clone https://${TEST_GITHUB_TOKEN}@github.com/evgenyneu/foo_ci_private.git
+
+      - run:
+          name: Read private repository
+          command: cat foo_ci_private/README.md
+
+      - run: echo "We are done"
